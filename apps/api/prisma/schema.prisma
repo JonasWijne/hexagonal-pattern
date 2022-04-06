@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 Int                @id @default(autoincrement())
+  email              String             @unique
+  firstName          String?
+  lastName           String?
+  authenticationType AuthenticationType @default(LOCAL)
+  credentials        UserCredentials?
+  roles              UserRole[]         @relation(references: [id])
+  externalId         String?
+  tokens             UserRefreshToken[]
+}
+
+model UserCredentials {
+  id     Int    @id @default(autoincrement())
+  value  String @db.Text
+  user   User   @relation(fields: [userId], references: [id])
+  userId Int    @unique
+}
+
+model UserRole {
+  id    Int    @id @default(autoincrement())
+  users User[] @relation(references: [id])
+  value Role
+}
+
+model UserRefreshToken {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  token      String   @db.Text
+  validUntil DateTime
+  userId     Int
+  revoked    Boolean  @default(false)
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum AuthenticationType {
+  LOCAL
+  GOOGLE
+  AZUREAD
+}
