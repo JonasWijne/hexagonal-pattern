@@ -3,7 +3,7 @@ import { InitUiCommand } from '@/modules/ui/Commands/InitUiCommand';
 import { UiModule } from '@/modules/ui/UiModule';
 
 const init = async () => {
-    UiModule.bootstrap();
+    UiModule
     const initUiCommand = new InitUiCommand();
     const serviceBus = ServiceBus.getInstance();
     const response = await serviceBus.handle(initUiCommand);
