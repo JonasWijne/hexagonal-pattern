@@ -1,3 +1,8 @@
-export const Module = (data: any) => {
-    return null;
+import {InitUiCommandHandler} from "@/modules/ui/CommandHandlers/InitUiCommandHandler";
+
+export const Module = (param: { provides: any[] }) => {
+    return (target: any) => {
+        target.prototype.provides = param.provides;
+    };
 };
+
