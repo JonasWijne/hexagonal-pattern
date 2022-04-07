@@ -1,13 +1,13 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import './index.css';
+import {ServiceBus} from "@/infrastructure/Concrete/ServiceBus";
+import {UiModule} from "@/modules/ui/UiModule";
+import {InitUiCommand} from "@/modules/ui/Commands/InitUiCommand";
 
-import '@/components/global';
-import { registerGlobalComponent } from './components/global';
-import router from './router';
+const init = async () => {
+    UiModule.bootstrap();
 
-const app = createApp(App);
-app.use(router);
-registerGlobalComponent(app);
+    const initUiCommand = new InitUiCommand();
+    const serviceBus = ServiceBus.getInstance();
+    await serviceBus.handle(initUiCommand);
+};
 
-app.mount('#app');
+init();
