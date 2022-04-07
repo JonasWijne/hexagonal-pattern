@@ -16,8 +16,7 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         '@vue/typescript/recommended',
         'plugin:vue/vue3-recommended',
-        'prettier',
-        'plugin:typescript-enum/recommended',
+        'prettier'
     ],
     ignorePatterns: ['dist', '**/assets/*'],
     rules: {
