@@ -3,6 +3,5 @@ import {Module} from "@/infrastructure/Decorators/Module";
 
 @Module({provides: [InitUiCommandHandler]})
 export class UiModule {
-    public static bootstrap() {
-    }
+    
 }
