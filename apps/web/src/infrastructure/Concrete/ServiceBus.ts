@@ -24,10 +24,11 @@ export class ServiceBus {
     }
 
     public async handle<T extends IServiceCall<any | undefined>, U>(input: T): Promise<ServiceResponse<U | Error>> {
-        const name = input.name;
+        // @ts-ignore
+        const name = input.getName(); // getName is not defined on the interface but is added to the class by a decorator
         const handler = this.handlers.get(name);
         if (!handler) {
-            const error = new Error("CommandHandler not found");
+            const error = new Error("CommandHandler not found for command: " + name);
             return ServiceResponse.failure(error);
         }
 

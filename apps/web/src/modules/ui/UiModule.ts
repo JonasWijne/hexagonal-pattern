@@ -1,12 +1,8 @@
-import {ServiceBus} from "@/infrastructure/Concrete/ServiceBus";
 import {InitUiCommandHandler} from "@/modules/ui/CommandHandlers/InitUiCommandHandler";
+import {Module} from "@/infrastructure/Decorators/Module";
 
-export class UiModule{
-    public static bootstrap(){
-        console.log('UiModule.bootstrap');
-
-        const instance = ServiceBus.getInstance();
-
-        instance.register('InitUiCommand', new InitUiCommandHandler())
+@Module({provides: [InitUiCommandHandler]})
+export class UiModule {
+    public static bootstrap() {
     }
 }
