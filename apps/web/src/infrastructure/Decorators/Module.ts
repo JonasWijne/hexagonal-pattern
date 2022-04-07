@@ -1,5 +1,3 @@
-
-export const Module = (data : any) => {
-    return (target: any) => {
-    }
+export const Module = (data: any) => {
+    return (target: any) => {};
 };

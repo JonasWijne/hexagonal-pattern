@@ -19,7 +19,6 @@ export class ServiceResponse<T> {
     static success<T>(data?: T): ServiceResponse<T> {
         return new ServiceResponse(ServiceResponseStatus.SUCCESS, data);
     }
-
 }
 
-export type VoidResponse = ServiceResponse<void>
+export type VoidResponse = ServiceResponse<void>;

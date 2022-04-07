@@ -1,3 +1,3 @@
-export interface IServiceCall<T>{
+export interface IServiceCall<T> {
     payload: T;
 }

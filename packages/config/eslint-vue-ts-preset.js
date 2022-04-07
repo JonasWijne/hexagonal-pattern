@@ -2,9 +2,7 @@ module.exports = {
     env: {
         node: true,
     },
-    plugins: [
-        "@typescript-eslint"
-    ],
+    plugins: ['@typescript-eslint'],
     globals: {
         defineProps: 'readonly',
         defineEmits: 'readonly',
@@ -12,11 +10,11 @@ module.exports = {
     },
     extends: [
         'eslint:recommended',
-        "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
         '@vue/typescript/recommended',
         'plugin:vue/vue3-recommended',
-        'prettier'
+        'prettier',
     ],
     ignorePatterns: ['dist', '**/assets/*'],
     rules: {
