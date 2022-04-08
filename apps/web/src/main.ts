@@ -1,12 +1,13 @@
-import { ServiceBus } from '@/infrastructure/Concrete/ServiceBus';
-import { InitUiCommand } from '@/modules/ui/Commands/InitUiCommand';
+import 'reflect-metadata';
+
+import { container } from 'tsyringe';
 import { UiModule } from '@/modules/ui/UiModule';
+import { App } from '@/infrastructure/App';
 
 const init = async () => {
     UiModule;
-    const initUiCommand = new InitUiCommand();
-    const serviceBus = ServiceBus.getInstance();
-    const response = await serviceBus.handle(initUiCommand);
+    const app = container.resolve(App);
+    app.run();
 };
 
 init();

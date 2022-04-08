@@ -2,10 +2,12 @@
     "display": "Vue App",
     "extends": "tsconfig/vue.json",
     "compilerOptions": {
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
         "baseUrl": ".",
         "paths": {
             "@/*": ["./src/*"]
-        }
+        },
     },
     "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "tests/**/*.ts", "tests/**/*.tsx"],
     "exclude": ["node_modules"]
