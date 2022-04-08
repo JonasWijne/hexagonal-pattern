@@ -1,4 +1,4 @@
-import {container, InjectionToken, singleton} from 'tsyringe';
+import { container, InjectionToken, singleton } from 'tsyringe';
 import { IObserver } from '@/infrastructure/Interfaces/IObserver';
 
 @singleton()

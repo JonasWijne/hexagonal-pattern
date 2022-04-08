@@ -1,3 +1,3 @@
-export interface IObserver{
+export interface IObserver {
     execute(data?: any): void;
 }

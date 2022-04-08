@@ -2,7 +2,7 @@ import { IObserver } from '@/infrastructure/Interfaces/IObserver';
 import { injectable } from 'tsyringe';
 import { ServiceBus } from '@/infrastructure/Concrete/ServiceBus';
 import { InitUiCommand } from '@/modules/ui/Commands/InitUiCommand';
-import {Observer} from "@/infrastructure/Decorators/Observer";
+import { Observer } from '@/infrastructure/Decorators/Observer';
 
 @injectable()
 @Observer('test')
