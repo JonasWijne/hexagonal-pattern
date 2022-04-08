@@ -16,7 +16,7 @@ export class EventBus {
         }
         this.listeners[eventName].push(listener);
     }
-    publish(eventName:string, args?: any) {
+    publish(eventName: string, args?: any) {
         if (!this.listeners[eventName]) {
             return;
         }

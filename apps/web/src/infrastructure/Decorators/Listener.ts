@@ -1,4 +1,4 @@
-import {EventBus} from "@/infrastructure/Concrete/EventBus";
+import { EventBus } from '@/infrastructure/Concrete/EventBus';
 
 export const Listener = (eventName: string) => {
     return (target: any): void => {

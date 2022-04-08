@@ -1,9 +1,9 @@
 const path = require('path');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const {VueLoaderPlugin} = require('vue-loader');
+const { VueLoaderPlugin } = require('vue-loader');
 
 const mode = process.env.NODE_ENV || 'development';
 
@@ -12,7 +12,7 @@ module.exports = {
     entry: './src/main.ts',
     output: {
         filename: 'index.js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
         static: {
@@ -21,25 +21,25 @@ module.exports = {
         compress: true,
         port: 3000,
     },
-    performance: {hints: mode === 'production' ? 'warning' : false},
+    performance: { hints: mode === 'production' ? 'warning' : false },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
             title: 'Hot Module Replacement',
-            template: 'index.html'
+            template: 'index.html',
         }),
         new CopyWebpackPlugin({
             patterns: [
                 {
                     from: 'src/assets',
-                    to: 'assets'
+                    to: 'assets',
                 },
-            ]
+            ],
         }),
         new MiniCssExtractPlugin({
-            filename: './index.css'
+            filename: './index.css',
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
     ],
     module: {
         rules: [
@@ -47,19 +47,25 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        cacheDirectory: true,
-                        presets: ['@babel/preset-env'],
-                        plugins: [
-                            ['import', {
-                                "libraryName": "antd",
-                                "style": true,   // or 'css'
-                            }, 'antd']
-                        ]
-                    }
-                }],
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            cacheDirectory: true,
+                            presets: ['@babel/preset-env'],
+                            plugins: [
+                                [
+                                    'import',
+                                    {
+                                        libraryName: 'antd',
+                                        style: true, // or 'css'
+                                    },
+                                    'antd',
+                                ],
+                            ],
+                        },
+                    },
+                ],
             },
             {
                 test: /\.ts$/,
@@ -70,10 +76,10 @@ module.exports = {
                         options: {
                             //Specify the specific TS compilation configuration to distinguish the TS configuration of the script
                             configFile: path.resolve(__dirname, './tsconfig.json'),
-                            appendTsSuffixTo: [/\.vue$/]
-                        }
-                    }
-                ]
+                            appendTsSuffixTo: [/\.vue$/],
+                        },
+                    },
+                ],
             },
             {
                 test: /\.css$/i,
@@ -81,14 +87,14 @@ module.exports = {
             },
             {
                 test: /\.vue$/,
-                use: ['vue-loader']
+                use: ['vue-loader'],
             },
-        ]
+        ],
     },
     resolve: {
         extensions: ['.js', '.ts'],
         alias: {
             '@': path.resolve(__dirname, 'src'),
-        }
+        },
     },
 };

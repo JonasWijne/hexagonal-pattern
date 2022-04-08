@@ -2,7 +2,7 @@ import { IServiceCall } from '@/infrastructure/Interfaces/IServiceCall';
 import { ServiceResponse } from '@/infrastructure/Concrete/ServiceResponse';
 import { IServiceCallHandler } from '@/infrastructure/Interfaces/IServiceCallHandler';
 import { MiddlewareChain } from '@/infrastructure/Concrete/MiddlewareChain';
-import {container, InjectionToken, singleton} from "tsyringe";
+import { container, InjectionToken, singleton } from 'tsyringe';
 
 @singleton()
 export class ServiceBus {
@@ -12,7 +12,7 @@ export class ServiceBus {
     >;
     private readonly _middlewareChain: MiddlewareChain<IServiceCall<any | undefined>, ServiceResponse<any | undefined>>;
 
-    constructor(middlewareChain: MiddlewareChain<IServiceCall<any | undefined>, ServiceResponse<any | undefined>> ) {
+    constructor(middlewareChain: MiddlewareChain<IServiceCall<any | undefined>, ServiceResponse<any | undefined>>) {
         this.handlers = new Map();
         this._middlewareChain = middlewareChain;
     }
@@ -21,7 +21,10 @@ export class ServiceBus {
         this._middlewareChain.add(middleware);
     }
 
-    public register(serviceCallName: string, handler: InjectionToken<IServiceCallHandler<IServiceCall<any | undefined>, ServiceResponse<any | undefined>>>): void {
+    public register(
+        serviceCallName: string,
+        handler: InjectionToken<IServiceCallHandler<IServiceCall<any | undefined>, ServiceResponse<any | undefined>>>
+    ): void {
         console.log(serviceCallName, handler);
         this.handlers.set(serviceCallName, handler);
     }
