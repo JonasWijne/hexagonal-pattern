@@ -1,8 +1,8 @@
 import { InitUiCommandHandler } from '@/modules/ui/CommandHandlers/InitUiCommandHandler';
 import { Module } from '@/infrastructure/Decorators/Module';
-import { UiEventListener } from '@/modules/ui/UiEventListener';
+import {TestObserver} from "@/modules/ui/Observers/TestObserver";
 
 @Module({
-    provides: [InitUiCommandHandler, UiEventListener],
+    provides: [InitUiCommandHandler, TestObserver],
 })
 export class UiModule {}

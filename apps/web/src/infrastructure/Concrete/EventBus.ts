@@ -1,32 +1,27 @@
-interface IListerner {
-    (event: any): void;
-}
+import {container, InjectionToken, singleton} from 'tsyringe';
+import { IObserver } from '@/infrastructure/Interfaces/IObserver';
 
+@singleton()
 export class EventBus {
-    private readonly listeners: { [key: string]: IListerner[] } = {};
-    private static instance: EventBus;
+    private readonly observers: { [key: string]: InjectionToken<IObserver>[] } = {};
 
     constructor() {
-        this.listeners = {};
+        this.observers = {};
     }
 
-    subscribe(eventName: string, listener: IListerner) {
-        if (!this.listeners[eventName]) {
-            this.listeners[eventName] = [];
+    subscribe(eventName: string, listener: InjectionToken<IObserver>) {
+        if (!this.observers[eventName]) {
+            this.observers[eventName] = [];
         }
-        this.listeners[eventName].push(listener);
+        this.observers[eventName].push(listener);
     }
+
     publish(eventName: string, args?: any) {
-        if (!this.listeners[eventName]) {
+        if (!this.observers[eventName]) {
             return;
         }
-        this.listeners[eventName].forEach(listener => listener(args));
-    }
-
-    static getInstance() {
-        if (!EventBus.instance) {
-            EventBus.instance = new EventBus();
-        }
-        return EventBus.instance;
+        this.observers[eventName].forEach(observer => {
+            container.resolve(observer).execute(args);
+        });
     }
 }
