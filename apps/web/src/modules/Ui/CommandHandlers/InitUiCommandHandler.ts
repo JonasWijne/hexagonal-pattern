@@ -1,5 +1,5 @@
 import { ICommandHandler } from '@/infrastructure/Interfaces/ICommandHandler';
-import { InitUiCommand } from '@/modules/ui/Commands/InitUiCommand';
+import { InitUiCommand } from '@/modules/Ui/Commands/InitUiCommand';
 import { ServiceResponse, VoidResponse } from '@/infrastructure/Concrete/ServiceResponse';
 import { CommandHandler } from '@/infrastructure/Decorators/CommandHandler';
 

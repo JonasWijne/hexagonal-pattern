@@ -3,10 +3,15 @@ import { container } from 'tsyringe';
 
 export const CommandHandler = (command: any) => {
     return (target: any) => {
-        container.register(`CommandHandler.${target.name}`, {
+        const token = `CommandHandler.${target.name}`;
+
+        container.register(token, {
             useClass: target,
         });
+
         // @ts-ignore
-        container.resolve(ServiceBus).register(command.name, `CommandHandler.${target.name}`);
+        const serviceBus = container.resolve(ServiceBus);
+
+        serviceBus.register(command.name, token);
     };
 };

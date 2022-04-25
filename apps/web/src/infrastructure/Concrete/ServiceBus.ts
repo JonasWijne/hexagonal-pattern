@@ -3,6 +3,7 @@ import { ServiceResponse } from '@/infrastructure/Concrete/ServiceResponse';
 import { IServiceCallHandler } from '@/infrastructure/Interfaces/IServiceCallHandler';
 import { MiddlewareChain } from '@/infrastructure/Concrete/MiddlewareChain';
 import { container, InjectionToken, singleton } from 'tsyringe';
+import { IMiddleware } from '@/infrastructure/Interfaces/IMiddleware';
 
 @singleton()
 export class ServiceBus {
@@ -10,14 +11,15 @@ export class ServiceBus {
         string,
         InjectionToken<IServiceCallHandler<IServiceCall<any | undefined>, ServiceResponse<any | undefined>>>
     >;
-    private readonly _middlewareChain: MiddlewareChain<IServiceCall<any | undefined>, ServiceResponse<any | undefined>>;
+    private readonly _middlewareChain: MiddlewareChain;
 
-    constructor(middlewareChain: MiddlewareChain<IServiceCall<any | undefined>, ServiceResponse<any | undefined>>) {
+    constructor(middlewareChain: MiddlewareChain) {
         this.handlers = new Map();
         this._middlewareChain = middlewareChain;
     }
 
-    public addMiddleware(middleware: any) {
+    public addMiddleware(middleware: InjectionToken<IMiddleware<any, any>>) {
+        console.log('adding middleware');
         this._middlewareChain.add(middleware);
     }
 
@@ -30,7 +32,7 @@ export class ServiceBus {
     }
 
     public async handle<T extends IServiceCall<any | undefined>, U>(input: T): Promise<ServiceResponse<U | Error>> {
-        const name = input.constructor.name; // getName is not defined on the interface but is added to the class by a decorator
+        const name = input.constructor.name;
 
         const token = this.handlers.get(name);
         if (!token) {

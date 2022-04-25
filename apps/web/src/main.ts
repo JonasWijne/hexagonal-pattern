@@ -1,13 +1,14 @@
 import 'reflect-metadata';
 
 import { container } from 'tsyringe';
-import { UiModule } from '@/modules/ui/UiModule';
 import { App } from '@/infrastructure/App';
+import { CoreModule } from '@/modules/Core/CoreModule';
+import { AppService } from '@/modules/App/AppService';
 
 const init = async () => {
-    UiModule;
-    const app = container.resolve(App);
-    app.run();
+    CoreModule.bootstrap();
+    const appService = container.resolve(AppService);
+    appService.run();
 };
 
 init();
