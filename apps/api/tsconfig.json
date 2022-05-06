@@ -1,7 +1,11 @@
 {
     "extends": "tsconfig/nestjs",
     "compilerOptions": {
+        "module": "ESNext",
         "outDir": "dist",
-        "baseUrl": "./"
+        "baseUrl": "./",
+        "target": "ESNext",
+        "moduleResolution": "Node",
+        "types": ["vite/client"]
     }
 }

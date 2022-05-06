@@ -14,8 +14,10 @@ import { FlagsmithModule } from '../flagsmith/flagsmith.module';
         PrismaModule.forRoot({ isGlobal: true }),
         ScheduleModule.forRoot(),
         UserModule,
-        AuthModule,
-        FlagsmithModule,
+
+        // TODO: find fix for these two modules
+        // AuthModule,
+        // FlagsmithModule,
     ],
     controllers: [AppController],
     providers: [AppService],
